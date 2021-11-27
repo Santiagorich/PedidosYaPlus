@@ -7,6 +7,9 @@ function waitForElementToDisplay(selector, checkFrequencyInMs) { //Wait for resu
             async function run() {
 
                 //Making ui changes
+                elperscroll = 50 //Number of elements shown per scroll
+                menus = {}
+                elnumber = 0 //Set elements shown counter to 0
                 actualresultcontainer = document.querySelector('#shop_card_result').parentElement.parentElement
                 document.querySelector('#results__right__component').querySelector('[direction="column"]').style.margin = '40px 0px 0px 0px';
                 document.querySelector('#verticals__left__component div').querySelector('[direction="column"]').style.margin = '40px 0px 0px 0px';
@@ -24,13 +27,10 @@ function waitForElementToDisplay(selector, checkFrequencyInMs) { //Wait for resu
                 loadingcounter = countertext.cloneNode(true)
                 loadingcounter.innerText = '' //Clear counter text
                 rightcont.appendChild(loadingcounter) //Append loading counter to show progress 
-
-                elperscroll = 50 //Number of elements shown per scroll
                 const urlParams = new URLSearchParams(window.location.search); //Get url params
                 restaurantsjson = await fetch(`https://www.pedidosya.com.uy/mobile/v5/shopList?businessType=RESTAURANT&country=1&max=900000000&offset=0&point=${urlParams.get('lat')},${urlParams.get('lng')}&withFilters=true`).then(res => res.json());
                 city = urlParams.get('city').toLowerCase()
-                menus = {}
-                elnumber = 0 //Set elements shown counter to 0
+
                 await getMenus() //Get restaurant menus
 
                 document.querySelector('#results__right__component').innerHTML = '' //Clear container after loading
@@ -51,7 +51,6 @@ function waitForElementToDisplay(selector, checkFrequencyInMs) { //Wait for resu
                 el7?.remove() //Remove ui elements of existing shop card to fit our needs
                 el6 = container.querySelector('#search_container').parentElement.parentElement.querySelector('picture')
                 el6?.remove() //Remove ui elements of existing shop card to fit our needs
-                sort = 0
                 countertext.innerText = 0 + ' comidas encontradas' //Texto cuantos restaurantes
                 svgsort = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  width="70%" height="70%" fill="#ffffff" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 489.389 489.389" style="enable-background:new 0 0 489.389 489.389;" xml:space="preserve"<g><g><path d="M261.294,326.102c-8.3-7.3-21.8-6.2-29.1,2.1l-77,86.8v-346.9c0-11.4-9.4-20.8-20.8-20.8s-20.8,9.4-20.8,20.8v346.9    l-77-86.8c-8.3-8.3-20.8-9.4-29.1-2.1c-8.3,8.3-9.4,20.8-2.1,29.1l113.4,126.9c8.5,10.5,23.5,8.9,30.2,0l114.4-126.9    C270.694,347.002,269.694,333.402,261.294,326.102z"/><path d="M483.994,134.702l-112.4-126.9c-10-10.1-22.5-10.7-31.2,0l-114.4,126.9c-7.3,8.3-6.2,21.8,2.1,29.1    c12.8,10.2,25.7,3.2,29.1-2.1l77-86.8v345.9c0,11.4,9.4,20.8,20.8,20.8s20.8-8.3,20.8-19.8v-346.8l77,86.8    c8.3,8.3,20.8,9.4,29.1,2.1C490.194,155.502,491.294,143.002,483.994,134.702z"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>'
 
@@ -99,6 +98,7 @@ function waitForElementToDisplay(selector, checkFrequencyInMs) { //Wait for resu
                         showFood()
                     }
                 });
+
                 //Creating sorter button
                 sortbtn = new button(svgsort, countertext.parentElement)
                 sortbtn.addEventListener('click', sorter)
@@ -107,6 +107,7 @@ function waitForElementToDisplay(selector, checkFrequencyInMs) { //Wait for resu
                 searchinput.addEventListener("keyup", (event) => {
                     if (event.key === "Enter") {
                         productlist = []
+                        elnumber = 0
                         loading(resultcontainer)
                         setTimeout(getFood(searchinput.value), 0);
                         setTimeout(() => { asc(); }, 0);
@@ -261,9 +262,12 @@ function waitForElementToDisplay(selector, checkFrequencyInMs) { //Wait for resu
                 //Function to show all the food
                 async function showFood() {
                     var fragment = '';
+                    var counter = 0;
                     countertext.innerText = productlist.length + ' comidas encontradas' //Show the number of results
+                    if (elnumber < productlist.length) {
                     for (const [idx, product] of productlist.slice(elnumber, elnumber + elperscroll).entries()) {
                         btncontainer.innerHTML = '' //Clear the button container
+
                         //Change text of to the elements
                         cloneprice.parentElement.parentElement.style.paddingTop = '2.5%'
                         clonetitle.innerText = capitalize(product.name)
@@ -292,14 +296,16 @@ function waitForElementToDisplay(selector, checkFrequencyInMs) { //Wait for resu
 
                         //Add html to the fragment
                         fragment += shopresultclone.outerHTML
+                        counter++
                     }
                     //Add the fragment to the container
                     resultcontainer.innerHTML += fragment
 
                     //Increase the number of elements showed by the elements added
-                    elnumber += elperscroll
+                    elnumber += counter
                 }
             }
+        }
             return;
         }
         else {
