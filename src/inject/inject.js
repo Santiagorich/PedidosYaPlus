@@ -4,7 +4,6 @@ function waitForElementToDisplay(selector, checkFrequencyInMs){
   var startTimeInMs = Date.now();
   (function loopSearch() {
     if (document.querySelector(selector) != null) {
-	console.log('Found')
 run();
       async function run() {
         actualresultcontainer = document.querySelector('#shop_card_result').parentElement.parentElement
