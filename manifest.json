@@ -1,0 +1,26 @@
+{
+    "name": "PedidosYa Plus",
+    "version": "0.0.1",
+    "manifest_version": 2,
+    "description": "Agrega funcionalidades extras a la pagina de PedidosYa",
+    "homepage_url": "http://www.pedidosya.com",
+    "icons": {
+        "16": "icons/icon72x72.png",
+        "48": "icons/icon72x72.png",
+        "128": "icons/icon72x72.png"
+    },
+    "default_locale": "en",
+    "permissions": [
+        "*://www.pedidosya.com.ar/restaurantes*", "*://www.pedidosya.com.bo/restaurantes*", "*://www.pedidosya.cl/restaurantes*", "*://www.pedidosya.cr/restaurantes*", "*://www.pedidosya.com.ec/restaurantes*", "*://www.pedidosyasv.com.sv/restaurantes*", "*://www.pedidosya.com.gt/restaurantes*", "*://www.pedidosya.com.hn/restaurantes*", "*://www.pedidosyani.com.ni/restaurantes*", "*://www.pedidosya.com.pa/restaurantes*", "*://www.pedidosya.com.py/restaurantes*", "*://www.pedidosya.com.pe/restaurantes*", "*://www.pedidosya.com.do/restaurantes*", "*://www.pedidosya.com.uy/restaurantes*", "*://www.pedidosya.com.ve/restaurantes*"
+    ],
+    "content_scripts": [{
+        "matches": [
+            "*://www.pedidosya.com.ar/restaurantes*", "*://www.pedidosya.com.bo/restaurantes*", "*://www.pedidosya.cl/restaurantes*", "*://www.pedidosya.cr/restaurantes*", "*://www.pedidosya.com.ec/restaurantes*", "*://www.pedidosyasv.com.sv/restaurantes*", "*://www.pedidosya.com.gt/restaurantes*", "*://www.pedidosya.com.hn/restaurantes*", "*://www.pedidosyani.com.ni/restaurantes*", "*://www.pedidosya.com.pa/restaurantes*", "*://www.pedidosya.com.py/restaurantes*", "*://www.pedidosya.com.pe/restaurantes*", "*://www.pedidosya.com.do/restaurantes*", "*://www.pedidosya.com.uy/restaurantes*", "*://www.pedidosya.com.ve/restaurantes*"
+        ],
+        "run_at": "document_start",
+        "all_frames": true,
+        "js": [
+            "src/inject/inject.js"
+        ]
+    }]
+}
