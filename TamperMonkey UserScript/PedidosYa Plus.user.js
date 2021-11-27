@@ -58,6 +58,7 @@ rightcont.appendChild(loadingcounter)
 elperscroll = 50
 const urlParams = new URLSearchParams(window.location.search);
 restaurantsjson = await fetch(\`https://www.pedidosya.com.uy/mobile/v5/shopList?businessType=RESTAURANT&country=1&max=900000000&offset=0&point=\${urlParams.get('lat')},\${urlParams.get('lng')}&withFilters=true\`).then(res => res.json());
+city = urlParams.get('city').toLowerCase()
 menus = {}
 elnumber = 0
 await getMenus()
@@ -88,7 +89,7 @@ if (sponsor) sponsor.remove()
 var clonetitle = styletitle(shopresultclone.querySelector('div div div:nth-child(2) > div:nth-child(1) > div'))
 var el5 = shopresultclone.querySelectorAll('svg')[1]
 if (!svgindex) {
-    shopresultclone.querySelectorAll('svg').forEach(function (svg, idx) {
+    shopresultclone.querySelectorAll('svg').forEach(function(svg, idx) {
         if (svg.parentElement.querySelector('span')) svgindex = idx
 
     })
@@ -117,11 +118,9 @@ el2?.remove()
 el3?.remove()
 el4?.remove()
 el5?.remove()
-resultcontainer.addEventListener('scroll', function(event)
-{
+resultcontainer.addEventListener('scroll', function(event) {
     var element = event.target;
-    if (element.scrollHeight - element.scrollTop === element.clientHeight)
-    {
+    if (element.scrollHeight - element.scrollTop === element.clientHeight) {
         showFood()
     }
 });
@@ -130,7 +129,7 @@ cloneprice.parentElement.style.backgroundColor = green[1]
 
 
 function asc() {
-    productlist = productlist.sort(function (a, b) {
+    productlist = productlist.sort(function(a, b) {
         return a.price - b.price;
     })
     resultcontainer.innerHTML = '' //Limpiar resultados
@@ -138,7 +137,7 @@ function asc() {
 
 }
 
-function loading(container){
+function loading(container) {
     container.innerHTML = ''
     loadingdiv = document.createElement('div')
     loadingdiv.id = 'loadingdiv'
@@ -151,7 +150,7 @@ function loading(container){
     container.appendChild(loadingdiv)
 }
 
-function stoploading(container){
+function stoploading(container) {
     container.querySelector('#loadingdiv')?.remove()
 }
 
@@ -163,9 +162,8 @@ function sorter() {
     stoploading(resultcontainer)
 }
 
-sortbtn = new button(svgsort, countertext.parentElement, () => {
-    sorter()
-})
+sortbtn = new button(svgsort, countertext.parentElement)
+sortbtn.addEventListener('click', sorter)
 
 productlist = []
 var svgindex
@@ -174,16 +172,13 @@ searchinput.addEventListener("keyup", (event) => {
         productlist = []
         loading(resultcontainer)
         setTimeout(getFood(searchinput.value), 0);
-        setTimeout(() => {
-            asc();
-
-        }, 0);
+        setTimeout(() => { asc(); }, 0);
         stoploading(resultcontainer)
 
     }
 })
 
-function wrap(el,link) {
+function wrap(el, link) {
     wrapper = document.createElement('a');
     wrapper.href = link;
     el.parentNode.insertBefore(wrapper, el);
@@ -226,7 +221,7 @@ async function getFood(input) {
                         productob['restname'] = restaurant.name
                         productob['restimg'] = \`https://images.deliveryhero.io/image/pedidosya/restaurants/\${restaurant.logo}\`
                         productob['restglink'] = \`http://www.google.com/maps/place/\${restaurant.latitude},\${restaurant.longitude}\`
-                        productob['menulink'] = \`https://www.pedidosya.com.uy/restaurantes/\${restaurant.cityName.toLowerCase()}/\${restaurant.link}-menu\`
+                        productob['menulink'] = \`https://www.pedidosya.com.uy/restaurantes/\${city}/\${restaurant.link}-menu\`
                         productob['productlink'] = \`\${productob.menulink}?p=\${product.legacyId}&menuSection=menu\`
                         productob['name'] = product.name
                         productob['currency'] = product.price.currencyMask
@@ -240,7 +235,7 @@ async function getFood(input) {
     }
 }
 
-function button(svg, container){
+function button(svg, container) {
     div = document.createElement('div')
     div.style.backgroundColor = redbtncolor
     div.style.borderRadius = '20px'
@@ -282,7 +277,7 @@ async function showFood() {
     var counter = 0;
     var fragment = '';
     countertext.innerText = productlist.length + ' comidas encontradas'
-    for (const [idx, product] of productlist.slice(elnumber,elnumber+elperscroll).entries()) {
+    for (const [idx, product] of productlist.slice(elnumber, elnumber + elperscroll).entries()) {
         btncontainer.innerHTML = ''
         cloneprice.parentElement.parentElement.style.paddingTop = '2.5%'
 
@@ -301,9 +296,9 @@ async function showFood() {
         menubtn = new button(svgrest, btncontainer)
         wrap(menubtn, productlist[idx].menulink)
         restbtn = new button(svgmap, btncontainer)
-        wrap(restbtn,productlist[idx].restglink);
+        wrap(restbtn, productlist[idx].restglink);
         prodbtn = new button(svgpedido, btncontainer)
-        wrap(prodbtn,productlist[idx].productlink);
+        wrap(prodbtn, productlist[idx].productlink);
         clonetitle.innerText = capitalize(product.name)
         cloneprice.style.color = green[0]
         cloneprice.innerText = product.currency + product.price
@@ -312,7 +307,6 @@ async function showFood() {
     resultcontainer.innerHTML += fragment
     elnumber += elperscroll
 }
-
 }
       return;
     }
