@@ -263,7 +263,7 @@ function waitForElementToDisplay(selector, checkFrequencyInMs) { //Wait for resu
 
                 //Get products from the menus
                 async function getFood(input) {
-                    if (input != '' && input != undefined) {
+                    if (input != undefined) {
                         inputarr = input.split(' ')
                         restaurantsjson.list.data.forEach(restaurant => {
                             Object.values(restaurant.menu)[0].sections.forEach(section => {
