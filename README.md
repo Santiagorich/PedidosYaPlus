@@ -13,7 +13,9 @@ Si tienes alguna sugerencia o funcionalidad que te gustaria que se agregara pued
 # Usage
  Carga la extension descomprimida desde google chrome://extensions/
  
- O usa el userscript dentro de la carpeta TamperMonkey con TamperMonkey https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en
+ O usa el userscript dentro de la carpeta TamperMonkey con TamperMonkey 
+ 1. Instala: https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en
+ 2. Abre: https://github.com/Santiagorich/PedidosYaPlus/raw/main/TamperMonkey%20UserScript/PedidosYa%20Plus.user.js
  
 # Screenshots
  ![image](https://user-images.githubusercontent.com/48382642/143699105-a8047f6a-3f9b-49fa-9672-176da5dbbab4.png)
