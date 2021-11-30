@@ -27,10 +27,10 @@
 
 (function() {
     'use strict';
-window.addEventListener('load', function () {
+    window.addEventListener('load', function() {
 
 
-var scriptText=`waitForElementToDisplay("#shop_card_result", 1000);
+        var scriptText = `waitForElementToDisplay("#shop_card_result", 1000);
 
 function waitForElementToDisplay(selector, checkFrequencyInMs) { //Wait for result element to load
     (function loopSearch() {
@@ -272,7 +272,7 @@ function waitForElementToDisplay(selector, checkFrequencyInMs) { //Wait for resu
                                     if (inputarr.every(searchq => product.name.toLowerCase().includes(searchq.toLowerCase()))) {
                                         productob['hours'] = new Date(restaurant.nextHour).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ' - ' + new Date(restaurant.nextHourClose).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                                         productob['opened'] = restaurant.opened
-                                        productob['delivers'] = restaurant.withLogistics
+                                        productob['delivers'] = restaurant.delivers 
                                         productob['restname'] = restaurant.name
                                         productob['restimg'] = \`https://images.deliveryhero.io/image/pedidosya/restaurants/\${restaurant.logo}\`
                                         productob['restglink'] = \`http://www.google.com/maps/place/\${restaurant.latitude},\${restaurant.longitude}\`
@@ -348,8 +348,8 @@ function waitForElementToDisplay(selector, checkFrequencyInMs) { //Wait for resu
     })();
 }
 `
-var newScript = document.createElement("script");
-newScript.innerHTML = scriptText
-document.body.append(newScript)
-})
+        var newScript = document.createElement("script");
+        newScript.innerHTML = scriptText
+        document.body.append(newScript)
+    })
 })();

@@ -240,7 +240,7 @@ function waitForElementToDisplay(selector, checkFrequencyInMs) { //Wait for resu
                                     if (inputarr.every(searchq => product.name.toLowerCase().includes(searchq.toLowerCase()))) {
                                         productob['hours'] = new Date(restaurant.nextHour).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ' - ' + new Date(restaurant.nextHourClose).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                                         productob['opened'] = restaurant.opened
-                                        productob['delivers'] = restaurant.withLogistics
+                                        productob['delivers'] = restaurant.delivers
                                         productob['restname'] = restaurant.name
                                         productob['restimg'] = `https://images.deliveryhero.io/image/pedidosya/restaurants/${restaurant.logo}`
                                         productob['restglink'] = `http://www.google.com/maps/place/${restaurant.latitude},${restaurant.longitude}`
