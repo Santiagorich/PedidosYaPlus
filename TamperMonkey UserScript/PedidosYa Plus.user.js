@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PedidosYa Plus
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Agrega funcionalidades extra a la pagina de PedidosYa
 // @author       Santiago Recoba
 // @run-at       document-end
