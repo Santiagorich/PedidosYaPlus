@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PedidosYa Plus
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.2
 // @description  Agrega funcionalidades extra a la pagina de PedidosYa
 // @author       Santiago Recoba
 // @run-at       document-end
@@ -282,7 +282,10 @@ function waitForElementToDisplay(selector, checkFrequencyInMs) { //Wait for resu
                                         productob['currency'] = product.price.currencyMask
                                         productob['price'] = product.price.finalPrice
                                         productob['description'] = product.description
+                                        if(restaurant.opened == 1){
                                         productlist.push(productob) //Add product bject to the product list
+
+}
                                     }
                                 });
                             });
