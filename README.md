@@ -21,4 +21,5 @@ Si tienes alguna sugerencia o funcionalidad que te gustaria que se agregara pued
  ![image](https://user-images.githubusercontent.com/48382642/143699105-a8047f6a-3f9b-49fa-9672-176da5dbbab4.png)
 
 # TO DO
- Mobile app for android (WIP)
+ Mobile app for android (Done)
+ Fix the issue with the button to order directly
