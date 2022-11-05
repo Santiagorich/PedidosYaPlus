@@ -1,4 +1,5 @@
-# PedidosYaPlus (Obsolete, use https://github.com/Santiagorich/MilaFinder)
+# PedidosYaPlus 
+# (Use https://github.com/Santiagorich/MilaFinder instead)
 Alguna vez te paso que vives en el centro de la ciudad y estas rodeado de restaurantes y no quieres ir buscando restaurante por restaurante la comida que quieres dentro de pedidosya y sientes que las categorias son muy genericas?
 
 Ami me sucedio por lo que cree esta pequeña extension la cual nos ayuda a buscar la comida que queramos y hasta ordenar los resultados por precio para conseguir la mejor comida al mejor precio posible
